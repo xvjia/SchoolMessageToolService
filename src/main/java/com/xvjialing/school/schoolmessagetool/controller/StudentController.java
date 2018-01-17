@@ -38,7 +38,7 @@ public class StudentController {
         if (studentService.isExistsByUsername(user.getUsername())){
             return ResultUtils.failed("该用户名已被注册");
         }
-        Student student = studentService.addStudent(user, JSON.parseObject(postStudent.getSchoolClass(), SchoolClass.class));
+        Student student = studentService.addStudent(user, JSON.parseObject(postStudent.getSchoolClass(), SchoolClass.class).getId());
         if (student==null){
             return ResultUtils.failed("注册学生失败");
         }

@@ -1,8 +1,5 @@
 package com.xvjialing.school.schoolmessagetool.bean.user;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.xvjialing.school.schoolmessagetool.bean.SchoolClass;
-
 import javax.persistence.*;
 
 @Entity
@@ -16,9 +13,9 @@ public class Student {
     @JoinColumn(name = "user_id",unique = true,nullable = false,updatable = false)
     private User user;
 
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "school_class_id",referencedColumnName = "id",nullable = false,updatable = false)
-    private SchoolClass schoolClass;
+//    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "school_class_id",referencedColumnName = "id",nullable = false,updatable = false)
+    private Integer schoolClassId;
 
 //    @ManyToMany(cascade = {CascadeType.REFRESH},fetch = FetchType.EAGER)
 //    private List<Message> messageList;
@@ -46,13 +43,12 @@ public class Student {
         this.user = user;
     }
 
-    public SchoolClass getSchoolClass() {
-        return schoolClass;
+    public Integer getSchoolClassId() {
+        return schoolClassId;
     }
 
-    @JsonBackReference
-    public void setSchoolClass(SchoolClass schoolClass) {
-        this.schoolClass = schoolClass;
+    public void setSchoolClassId(Integer schoolClassId) {
+        this.schoolClassId = schoolClassId;
     }
 
 //    public List<Message> getMessageList() {
@@ -65,14 +61,12 @@ public class Student {
 //    }
 
 
-
-
     @Override
     public String toString() {
         return "Student{" +
                 "id=" + id +
                 ", user=" + user +
-                ", schoolClass=" + schoolClass +
+                ", schoolClassId=" + schoolClassId +
                 '}';
     }
 }

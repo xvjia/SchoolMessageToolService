@@ -1,7 +1,6 @@
 package com.xvjialing.school.schoolmessagetool.bean;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.xvjialing.school.schoolmessagetool.bean.user.Student;
 import com.xvjialing.school.schoolmessagetool.bean.user.Teacher;
 
 import javax.persistence.*;
@@ -20,8 +19,8 @@ public class SchoolClass {
     @OneToMany(mappedBy = "schoolClass")
     private List<Message> messageList;
 
-    @OneToMany(mappedBy = "schoolClass")
-    private List<Student> studentList;
+//    @OneToMany(mappedBy = "schoolClass")
+//    private List<Student> studentList;
 
 //    @ManyToMany(cascade = CascadeType.ALL)
 //    @JoinTable(name = "SCHOOLCLASS_TEACHER" ,
@@ -54,14 +53,14 @@ public class SchoolClass {
         this.messageList = messageList;
     }
 
-    public List<Student> getStudentList() {
-        return studentList;
-    }
-
-//    @JsonBackReference
-    public void setStudentList(List<Student> studentList) {
-        this.studentList = studentList;
-    }
+//    public List<Student> getStudentList() {
+//        return studentList;
+//    }
+//
+////    @JsonBackReference
+//    public void setStudentList(List<Student> studentList) {
+//        this.studentList = studentList;
+//    }
 
     public List<Teacher> getTeacherList() {
         return teacherList;
@@ -78,7 +77,7 @@ public class SchoolClass {
                 "id=" + id +
                 ", classNumber='" + classNumber + '\'' +
                 ", messageList=" + messageList +
-                ", studentList=" + studentList +
+//                ", studentList=" + studentList +
                 ", teacherList=" + teacherList +
                 '}';
     }
