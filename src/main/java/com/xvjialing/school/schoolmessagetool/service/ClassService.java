@@ -24,4 +24,8 @@ public class ClassService {
     public List<SchoolClass> getClassList(){
         return classRepository.findAll();
     }
+
+    public SchoolClass findOneClass(Integer id){
+        return classRepository.findOne(id);
+    }
 }

@@ -1,9 +1,13 @@
 package com.xvjialing.school.schoolmessagetool.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.xvjialing.school.schoolmessagetool.bean.Result;
+import com.xvjialing.school.schoolmessagetool.bean.SchoolClass;
+import com.xvjialing.school.schoolmessagetool.bean.user.PostTeacher;
 import com.xvjialing.school.schoolmessagetool.bean.user.Teacher;
 import com.xvjialing.school.schoolmessagetool.bean.user.User;
 import com.xvjialing.school.schoolmessagetool.service.TeacherService;
+import com.xvjialing.school.schoolmessagetool.utils.BeanTransformUtils;
 import com.xvjialing.school.schoolmessagetool.utils.ResultUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,11 +30,12 @@ public class TeacherController {
     TeacherService teacherService;
 
     @PostMapping("/teacher")
-    public Result<Teacher> addTeacher(User user){
+    public Result<Teacher> addTeacher(PostTeacher postTeacher){
+        User user = BeanTransformUtils.transformPostTecher(postTeacher);
         if (teacherService.isExistsByUsername(user.getUsername())){
             return ResultUtils.failed("该用户名已被注册");
         }
-        Teacher teacher1 = teacherService.addTeacher(user);
+        Teacher teacher1 = teacherService.addTeacher(user, JSON.parseArray(postTeacher.getClassList(), SchoolClass.class),postTeacher.getSubject());
         if (teacher1==null){
             return ResultUtils.failed("教师注册失败");
         }
@@ -54,5 +59,6 @@ public class TeacherController {
         }
         return ResultUtils.success("success",teacher);
     }
+
 
 }

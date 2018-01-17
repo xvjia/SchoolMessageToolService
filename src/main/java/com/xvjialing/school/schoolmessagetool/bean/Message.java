@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.xvjialing.school.schoolmessagetool.bean.user.Teacher;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Message {
@@ -11,19 +12,21 @@ public class Message {
     @GeneratedValue
     private Integer id;
 
-    private Long timeStamp;
+    private Date time;
 
     private String message;
 
+    private Integer messageType;
+
     @ManyToOne(targetEntity = Teacher.class)
-    @JoinColumn(name = "teacher_id",unique = true,nullable = false,updatable = false)
+    @JoinColumn(name = "teacher_id",nullable = false)
     private Teacher publisher;
 
 //    @ManyToMany(mappedBy = "messageList")
 //    private List<Student> studentList;
 
     @ManyToOne(targetEntity = SchoolClass.class)
-    @JoinColumn(name = "school_class_id",unique = true,nullable = false,updatable = false)
+    @JoinColumn(name = "school_class_id",nullable = false)
     private SchoolClass schoolClass;
 
 
@@ -39,12 +42,12 @@ public class Message {
         this.id = id;
     }
 
-    public Long getTimeStamp() {
-        return timeStamp;
+    public Date getTime() {
+        return time;
     }
 
-    public void setTimeStamp(Long timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     public String getMessage() {
@@ -63,6 +66,14 @@ public class Message {
         return schoolClass;
     }
 
+    public Integer getMessageType() {
+        return messageType;
+    }
+
+    public void setMessageType(Integer messageType) {
+        this.messageType = messageType;
+    }
+
     @JsonBackReference
     public void setSchoolClass(SchoolClass schoolClass) {
         this.schoolClass = schoolClass;
@@ -72,7 +83,6 @@ public class Message {
     public void setPublisher(Teacher publisher) {
         this.publisher = publisher;
     }
-
 
 //    public List<Student> getStudentList() {
 //        return studentList;
@@ -88,8 +98,9 @@ public class Message {
     public String toString() {
         return "Message{" +
                 "id=" + id +
-                ", timeStamp=" + timeStamp +
+                ", time=" + time +
                 ", message='" + message + '\'' +
+                ", messageType=" + messageType +
                 ", publisher=" + publisher +
                 ", schoolClass=" + schoolClass +
                 '}';

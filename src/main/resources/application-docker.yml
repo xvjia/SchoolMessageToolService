@@ -3,6 +3,8 @@ spring:
     url: jdbc:mysql://45.77.159.109:3336/school_message_tool?characterEncoding=utf-8
     username: root
     password: 123456789
+  jpa:
+    show-sql: false
 #  data:
 #    mongodb:
 #      uri: mongodb://45.77.159.109:27017/school_message_tool

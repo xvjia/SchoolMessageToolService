@@ -1,5 +1,6 @@
 package com.xvjialing.school.schoolmessagetool.service;
 
+import com.xvjialing.school.schoolmessagetool.bean.SchoolClass;
 import com.xvjialing.school.schoolmessagetool.bean.user.Teacher;
 import com.xvjialing.school.schoolmessagetool.bean.user.User;
 import com.xvjialing.school.schoolmessagetool.commons.UserType;
@@ -20,10 +21,13 @@ public class TeacherService {
     UserRepository userRepository;
 
     @Transactional
-    public Teacher addTeacher(User user){
+    public Teacher addTeacher(User user, List<SchoolClass> schoolClassList, String subject){
         User user1 = userRepository.save(user);
         Teacher teacher=new Teacher();
         teacher.setUser(user1);
+        teacher.setSchoolClassList(schoolClassList);
+//        teacher.getSchoolClassList().addAll(schoolClassList);
+        teacher.setSubject(subject);
         return teacherRepository.save(teacher);
     }
 

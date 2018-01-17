@@ -14,6 +14,8 @@ public class Teacher {
     @GeneratedValue
     private Integer id;
 
+    private String subject;
+
     @OneToOne(optional = false)
     @JoinColumn(name = "user_id",unique = true,nullable = false,updatable = false)
     private User user;
@@ -21,8 +23,12 @@ public class Teacher {
     @OneToMany(mappedBy = "publisher",cascade = {CascadeType.REFRESH})
     private Set<Message> sendMessageSet;
 
-    @ManyToMany(mappedBy = "teacherList")
-    private List<SchoolClass> classList;
+//    @ManyToMany(mappedBy = "teacherList")
+    @ManyToMany(cascade = CascadeType.REFRESH)
+    @JoinTable(name = "schoolclass_teacher",joinColumns = {
+            @JoinColumn(name = "teacher_id",referencedColumnName = "id")
+    },inverseJoinColumns = {@JoinColumn(name = "schoolClass_id",referencedColumnName = "id")})
+    private List<SchoolClass> schoolClassList;
 
     public Teacher() {
     }
@@ -33,6 +39,14 @@ public class Teacher {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public User getUser() {
@@ -51,12 +65,23 @@ public class Teacher {
         this.sendMessageSet = sendMessageSet;
     }
 
+    public List<SchoolClass> getSchoolClassList() {
+        return schoolClassList;
+    }
+
+    public void setSchoolClassList(List<SchoolClass> schoolClassList) {
+        this.schoolClassList = schoolClassList;
+    }
+
+
     @Override
     public String toString() {
-        return "{" +
-                "id:" + id +
-                ", user:" + user +
-                ", sendMessageSet:" + sendMessageSet +
+        return "Teacher{" +
+                "id=" + id +
+                ", subject='" + subject + '\'' +
+                ", user=" + user +
+                ", sendMessageSet=" + sendMessageSet +
+                ", schoolClassList=" + schoolClassList +
                 '}';
     }
 }

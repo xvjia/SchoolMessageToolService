@@ -1,8 +1,10 @@
 package com.xvjialing.school.schoolmessagetool.service;
 
+import com.xvjialing.school.schoolmessagetool.bean.SchoolClass;
 import com.xvjialing.school.schoolmessagetool.bean.user.Student;
 import com.xvjialing.school.schoolmessagetool.bean.user.User;
 import com.xvjialing.school.schoolmessagetool.commons.UserType;
+import com.xvjialing.school.schoolmessagetool.repository.ClassRepository;
 import com.xvjialing.school.schoolmessagetool.repository.StudentRepository;
 import com.xvjialing.school.schoolmessagetool.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +20,15 @@ public class StudentService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    ClassRepository classRepository;
+
     @Transactional
-    public Student addStudent(User user){
+    public Student addStudent(User user, SchoolClass schoolClass){
         User user1 = userRepository.save(user);
         Student student = new Student();
         student.setUser(user1);
+        student.setSchoolClass(schoolClass);
         return studentRepository.save(student);
     }
 
@@ -36,6 +42,11 @@ public class StudentService {
             return null;
         }
         return studentRepository.findByUser(user);
+//        return studentRepository.findOne(student.getId());
     }
+
+
+
+
 
 }
