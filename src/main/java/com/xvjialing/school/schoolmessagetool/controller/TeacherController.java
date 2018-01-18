@@ -12,10 +12,7 @@ import com.xvjialing.school.schoolmessagetool.utils.ResultUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +55,16 @@ public class TeacherController {
             return ResultUtils.failed("用户名或密码错误");
         }
         return ResultUtils.success("success",teacher);
+    }
+
+    @GetMapping("/teacher/{id}")
+    public Result<Teacher> getTeacher(@PathVariable("id") int id){
+        Teacher teacher = teacherService.findById(id);
+        if (teacher==null){
+            return ResultUtils.failed("教师获取失败");
+        }else {
+            return ResultUtils.success("成功",teacher);
+        }
     }
 
 

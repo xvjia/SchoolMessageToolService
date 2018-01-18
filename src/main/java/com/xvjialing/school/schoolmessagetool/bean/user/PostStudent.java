@@ -10,6 +10,8 @@ public class PostStudent {
 
     private Integer role;
 
+    private String name;
+
     private String schoolClass;
 
     public Integer getId() {
@@ -52,6 +54,14 @@ public class PostStudent {
         this.schoolClass = schoolClass;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "PostStudent{" +
@@ -59,7 +69,8 @@ public class PostStudent {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
-                ", schoolClass=" + schoolClass +
+                ", name='" + name + '\'' +
+                ", schoolClass='" + schoolClass + '\'' +
                 '}';
     }
 }

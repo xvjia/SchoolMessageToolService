@@ -8,6 +8,8 @@ public class PostTeacher {
 
     private String password;
 
+    private String name;
+
     private Integer role;
 
     private String subject;
@@ -60,5 +62,26 @@ public class PostTeacher {
 
     public void setClassList(String classList) {
         this.classList = classList;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "PostTeacher{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", role=" + role +
+                ", subject='" + subject + '\'' +
+                ", classList='" + classList + '\'' +
+                '}';
     }
 }

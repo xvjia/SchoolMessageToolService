@@ -1,7 +1,6 @@
 package com.xvjialing.school.schoolmessagetool.bean;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.xvjialing.school.schoolmessagetool.bean.user.Teacher;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,9 +17,9 @@ public class Message {
 
     private Integer messageType;
 
-    @ManyToOne(targetEntity = Teacher.class)
-    @JoinColumn(name = "teacher_id",nullable = false)
-    private Teacher publisher;
+//    @ManyToOne(targetEntity = Teacher.class)
+//    @JoinColumn(name = "teacher_id",nullable = false)
+    private Integer teacher_id;
 
 //    @ManyToMany(mappedBy = "messageList")
 //    private List<Student> studentList;
@@ -58,8 +57,12 @@ public class Message {
         this.message = message;
     }
 
-    public Teacher getPublisher() {
-        return publisher;
+    public Integer getTeacher_id() {
+        return teacher_id;
+    }
+
+    public void setTeacher_id(Integer teacher_id) {
+        this.teacher_id = teacher_id;
     }
 
     public SchoolClass getSchoolClass() {
@@ -79,10 +82,6 @@ public class Message {
         this.schoolClass = schoolClass;
     }
 
-    @JsonBackReference
-    public void setPublisher(Teacher publisher) {
-        this.publisher = publisher;
-    }
 
 //    public List<Student> getStudentList() {
 //        return studentList;
@@ -101,7 +100,7 @@ public class Message {
                 ", time=" + time +
                 ", message='" + message + '\'' +
                 ", messageType=" + messageType +
-                ", publisher=" + publisher +
+                ", teacher_id=" + teacher_id +
                 ", schoolClass=" + schoolClass +
                 '}';
     }

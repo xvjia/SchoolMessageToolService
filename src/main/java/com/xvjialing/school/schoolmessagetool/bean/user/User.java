@@ -13,6 +13,8 @@ public class User {
 
     private String password;
 
+    private String name;
+
     private Integer role;
 
     public User(){
@@ -51,13 +53,22 @@ public class User {
         this.role = role;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
-        return "{" +
-                "id:" + id +
-                ", username:'" + username + '\'' +
-                ", password:'" + password + '\'' +
-                ", role:" + role +
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", role=" + role +
                 '}';
     }
 }
